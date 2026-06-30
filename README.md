@@ -1,23 +1,24 @@
 # Contacten Gemeentes
 
-Versie 2 voor GitHub Pages.
+Versie 3 voor GitHub Pages.
 
-Deze versie werkt direct op GitHub Pages zonder buildstap.
+## Nieuw in versie 3
+
+- Verbeterd moederscherm.
+- Bij een moeder zie je nu direct volledige contactkaarten:
+  - naam
+  - functie
+  - gemeente
+  - mobiel
+  - vast
+  - opmerkingen
+- Kinderen en opmerkingen blijven rechts zichtbaar.
 
 ## Bestanden
 
 - index.html
 - style.css
 - app.js
-
-## Doel
-
-Dit is de eerste echte app-interface:
-- dashboard
-- gemeenten centraal
-- contactpersonen per gemeente
-- moeder- en kindschermen
-- centrale zoekfunctie
 
 ## Volgende fase
 

@@ -180,23 +180,60 @@ function moederScreen(id){
   const m = moeder(id);
   const cs = data.contactpersonen.filter(c=>c.moeders.includes(id));
   const ks = data.kinderen.filter(k=>m.kinderen.includes(k.id));
+
+  const contactCards = cs.length
+    ? cs.map(c => {
+        const g = gemeente(c.gemeenteId);
+        return `
+          <button class="mother-contact-card" onclick="setScreen('contact',${c.id})">
+            <div class="avatar">${initials(c.naam)}</div>
+            <div class="mother-contact-main">
+              <strong>${c.naam}</strong>
+              <span>${c.functie || "Geen functie"}</span>
+              <small>${g ? g.naam : "Geen gemeente"}</small>
+            </div>
+            <div class="mother-contact-info">
+              <div>📱 ${c.mobiel || "—"}</div>
+              <div class="sub">Mobiel</div>
+            </div>
+            <div class="mother-contact-info">
+              <div>☎️ ${c.vast || "—"}</div>
+              <div class="sub">Vast</div>
+            </div>
+            <div class="mother-contact-info wide">
+              <div>📝 ${c.opmerkingen || "—"}</div>
+              <div class="sub">Opmerkingen</div>
+            </div>
+            <div class="chev">›</div>
+          </button>
+        `;
+      }).join("")
+    : `<div class="empty">Geen contactpersonen gekoppeld.</div>`;
+
   return `
     <button class="back" onclick="setScreen('dashboard')">← Terug</button>
     <div class="profile">
       <div class="avatar large">👩</div>
       <div><h2>${m.naam}</h2><p>Moeder</p></div>
     </div>
-    <div class="grid">
-      <div class="panel">
-        <h3>Contactpersonen</h3>
-        <div class="chips">${cs.map(c=>`<button onclick="setScreen('contact',${c.id})">${c.naam}</button>`).join("") || `<p class="muted">Geen contactpersonen.</p>`}</div>
+
+    <div class="mother-layout">
+      <section class="panel mother-main-panel">
+        <h3>Gekoppelde contactpersonen</h3>
+        <div class="mother-contact-list">
+          ${contactCards}
+        </div>
+      </section>
+
+      <aside class="panel">
+        <h3>Kinderen</h3>
+        <div class="chips">
+          ${ks.map(k=>`<button onclick="setScreen('kind',${k.id})">${k.naam}</button>`).join("") || `<p class="muted">Geen kinderen.</p>`}
+        </div>
+
         <h3 style="margin-top:24px">Opmerkingen</h3>
         <p>${m.opmerkingen || "—"}</p>
-      </div>
-      <div class="panel">
-        <h3>Kinderen</h3>
-        <div class="chips">${ks.map(k=>`<button onclick="setScreen('kind',${k.id})">${k.naam}</button>`).join("") || `<p class="muted">Geen kinderen.</p>`}</div>
-      </div>
+      </aside>
     </div>`;
 }
 
