@@ -181,28 +181,16 @@ function moederScreen(id){
   const cs = data.contactpersonen.filter(c=>c.moeders.includes(id));
   const ks = data.kinderen.filter(k=>m.kinderen.includes(k.id));
 
-  const contactCards = cs.length
+  const compactContacts = cs.length
     ? cs.map(c => {
         const g = gemeente(c.gemeenteId);
         return `
-          <button class="mother-contact-card" onclick="setScreen('contact',${c.id})">
-            <div class="avatar">${initials(c.naam)}</div>
-            <div class="mother-contact-main">
+          <button class="compact-contact-row" onclick="setScreen('contact',${c.id})">
+            <div class="avatar compact">${initials(c.naam)}</div>
+            <div class="compact-contact-text">
               <strong>${c.naam}</strong>
               <span>${c.functie || "Geen functie"}</span>
               <small>${g ? g.naam : "Geen gemeente"}</small>
-            </div>
-            <div class="mother-contact-info">
-              <div>📱 ${c.mobiel || "—"}</div>
-              <div class="sub">Mobiel</div>
-            </div>
-            <div class="mother-contact-info">
-              <div>☎️ ${c.vast || "—"}</div>
-              <div class="sub">Vast</div>
-            </div>
-            <div class="mother-contact-info wide">
-              <div>📝 ${c.opmerkingen || "—"}</div>
-              <div class="sub">Opmerkingen</div>
             </div>
             <div class="chev">›</div>
           </button>
@@ -212,16 +200,22 @@ function moederScreen(id){
 
   return `
     <button class="back" onclick="setScreen('dashboard')">← Terug</button>
-    <div class="profile">
+
+    <div class="profile mother-profile">
       <div class="avatar large">👩</div>
-      <div><h2>${m.naam}</h2><p>Moeder</p></div>
+      <div>
+        <h2>${m.naam}</h2>
+        <p>Moeder</p>
+        <div class="mother-note-inline">📝 ${m.opmerkingen || "Geen opmerkingen"}</div>
+      </div>
     </div>
 
     <div class="mother-layout">
       <section class="panel mother-main-panel">
-        <h3>Gekoppelde contactpersonen</h3>
-        <div class="mother-contact-list">
-          ${contactCards}
+        <h3>Contactpersonen</h3>
+        <p class="muted compact-help">Klik op een contactpersoon voor telefoonnummer, e-mail en opmerkingen.</p>
+        <div class="compact-contact-list">
+          ${compactContacts}
         </div>
       </section>
 
@@ -230,9 +224,6 @@ function moederScreen(id){
         <div class="chips">
           ${ks.map(k=>`<button onclick="setScreen('kind',${k.id})">${k.naam}</button>`).join("") || `<p class="muted">Geen kinderen.</p>`}
         </div>
-
-        <h3 style="margin-top:24px">Opmerkingen</h3>
-        <p>${m.opmerkingen || "—"}</p>
       </aside>
     </div>`;
 }

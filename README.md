@@ -1,27 +1,21 @@
 # Contacten Gemeentes
 
-Versie 3 voor GitHub Pages.
+Versie 4 voor GitHub Pages.
 
-## Nieuw in versie 3
+## Nieuw in versie 4
 
-- Verbeterd moederscherm.
-- Bij een moeder zie je nu direct volledige contactkaarten:
+- Moeder-opmerkingen staan direct onder de naam van de moeder.
+- Contactpersonen bij een moeder zijn compact weergegeven.
+- Bij contactpersonen zie je direct:
   - naam
   - functie
   - gemeente
-  - mobiel
-  - vast
-  - opmerkingen
-- Kinderen en opmerkingen blijven rechts zichtbaar.
+- Telefoon, e-mail en opmerkingen van een contactpersoon staan pas op de detailpagina.
+- Hierdoor blijft het scherm overzichtelijk als er veel contactpersonen gekoppeld zijn.
 
 ## Bestanden
 
 - index.html
 - style.css
 - app.js
-
-## Volgende fase
-
-- koppeling met Microsoft Lists
-- Microsoft Entra login
-- eigen domein: contacten.hettwentsegeluk.nl
+- README.md
